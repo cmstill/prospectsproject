@@ -1,6 +1,11 @@
+import ReceiversCoordinator from "../coordinators/recievers.coordinator.js";
+
 export const getReceivers = async (req, res, next) => {
   console.log('Controller: getRecievers');
-  res.status(200).json([]);
+
+  const result = ReceiversCoordinator.getReceivers();
+
+  res.status(200).json(result);
 };
 
 export const createReceiver = async (req, res, next) => {
