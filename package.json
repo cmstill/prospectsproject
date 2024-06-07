@@ -1,0 +1,30 @@
+{
+  "name": "prospectsproject-1",
+  "version": "0.0.1",
+  "description": "a project to track/evaluate incoming RB, TE, and WR prospects to the NFL",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cmstill/prospectsproject.git"
+  },
+  "author": "Cameron Still",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cmstill/prospectsproject/issues"
+  },
+  "homepage": "https://github.com/cmstill/prospectsproject#readme",
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.29.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.19.2",
+    "nodemon": "^3.1.3"
+  }
+}
