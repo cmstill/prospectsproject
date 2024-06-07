@@ -6,6 +6,15 @@ export default class ReceiversCoordinator { // making this a class so that I can
 
     return ReceiversModel.getReceiver(); // have to return something here because this is what you will be passing to the controller..and what I'm returning is the return value from getReciever in my ReceiversModel class which is my array simualting a DB
   };
+
+  static createReceiver = (newReceiver) =>  {
+		console.log('t/ Coordinator: createReciever');
+		console.log('New Receiver:', newReceiver);
+
+		//TODO: generate unique ID for each receiver created
+
+		return ReceiversModel.createReceiver(newReceiver);
+	}
 }
 
 // coordinators are where we manipulate requests in a way that needs to be done every time, like generating a unique ID for every request

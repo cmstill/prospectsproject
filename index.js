@@ -1,8 +1,12 @@
 import express from 'express';
+import bodyParser from 'body-parser';
+const { json } = bodyParser;
+
 import receiversRouter from './routes/receivers.routes.js';
 
 const app = express();
 const port = 3000;
+app.use(json()); //this is express.use() to set up a new middleware.  In this case, that middleware is bodyparser that allows us to parse and use incoming request bodies
 
 app.listen(port, () => {
   console.log(`Starting express application on port ${port}`);
