@@ -7,9 +7,12 @@ export const getReceivers = async (req, res, next) => {
 };
 
 export const createReceiver = async (req, res, next) => {
-  const result = ReceiversCoordinator.createReceiver(req.body);
-
-  res.status(200).json(result);
+  try{
+    const result = ReceiversCoordinator.createReceiver(req.body);
+    res.status(200).json(result);
+  } catch (ex) { // ex is a param that we could name anything...it's an exception (error) we're catching so ex for short
+    next(ex); // this is what invokes our error handler middleware
+  }
 };
 
 export const getReceiver = async (req, res, next) => {

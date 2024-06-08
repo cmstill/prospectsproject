@@ -36,13 +36,13 @@ export default class ReceiversModel {
     const receiverIndex = receivers.findIndex((r) => (r.id === id));
     if (receiverIndex > -1) {
       Object.keys(receiver).forEach((key) => {
-				if (key === 'id') {
-					return;
-				}
+        if (key === 'id') {
+          return;
+        }
         receivers[receiverIndex][key] = receiver[key];
       });
 
-			return receivers[receiverIndex];
+      return receivers[receiverIndex];
     }
 
     return false;

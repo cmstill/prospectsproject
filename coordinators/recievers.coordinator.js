@@ -5,6 +5,7 @@ export default class ReceiversCoordinator { // making this a class so that I can
   static getReceivers = () => ReceiversModel.getReceivers(); // have to return something here because this is what you will be passing to the controller..and what I'm returning is the return value from getReciever in my ReceiversModel class which is my array simualting a DB
 
   static createReceiver = (newReceiver) => {
+		throw new Error('Cameron breaking stuff');
     const receiver = {
       ...newReceiver,
       id: uuid(),
