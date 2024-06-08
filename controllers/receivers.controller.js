@@ -1,40 +1,43 @@
 import ReceiversCoordinator from "../coordinators/recievers.coordinator.js";
 
 export const getReceivers = async (req, res, next) => {
-  console.log('Controller: getRecievers');
-
   const result = ReceiversCoordinator.getReceivers();
 
   res.status(200).json(result);
 };
 
 export const createReceiver = async (req, res, next) => {
-  console.log('Controller: createReciever');
-  console.log('Request Body:', req.body);
-
   const result = ReceiversCoordinator.createReceiver(req.body);
 
   res.status(200).json(result);
 };
 
 export const getReceiver = async (req, res, next) => {
-  console.log(`Controller: getReciever(${req.params.id})`);
-  res.status(200).json({});
-};
+  console.log('Controller: getReceiver');
+  console.log('Request Params ID:', req.params.id);
 
-export const replaceReceiver = async (req, res, next) => {
-  console.log(`Controller: replaceReciever(${req.params.id})`);
-  res.status(200).json({});
+  const result = ReceiversCoordinator.getReceiver(req.params.id); // req.params.id here is the reciever by id...req.params is on the request object and hold params 
+
+  if (result) { // this checks if result (req.param.id) exists and if so, I get a 200 with result...if not then 404 
+    res.status(200).json(result);
+  } else {
+    res.status(404).json();
+  }
 };
 
 export const deleteReceiver = async (req, res, next) => {
-  console.log(`Controller: deleteReciever(${req.params.id})`);
-  res.status(200).json({});
+  const result = ReceiversCoordinator.deleteReceiver(req.params.id);
+
+  res.status(200).json(result);
 };
 
 export const updateReceiver = async (req, res, next) => {
-  console.log(`Controller: updateReciever(${req.params.id})`);
-  res.status(200).json({});
+  const result = ReceiversCoordinator.updateReceiver(req.params.id, req.body); // has to accept the id of the receiver you want to patch and the body object that you are going to be patching the receiver with
+  if (result) {
+    res.status(200).json(result);
+  } else {
+    res.status(404).json();
+  }
 };
 // every resource I am supporting will need a function in the controller
 /* ie if I am doing a get HTTP method for excercises, I'll make a getExcercises function and etc. for delete, update etc */

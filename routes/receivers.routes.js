@@ -1,6 +1,6 @@
 import express from 'express';
 import {
-  getReceivers, createReceiver, getReceiver, replaceReceiver, deleteReceiver, updateReceiver,
+  getReceivers, createReceiver, getReceiver, deleteReceiver, updateReceiver,
 } from '../controllers/receivers.controller.js';
 
 const receiversRouter = express.Router(); // Router is a method on express object that we're importing above...it's what allows us to set up routes...it is a method that accepts routes and then the function you wand to call on those routes...and these funcitons are found in the controller
@@ -13,9 +13,6 @@ receiversRouter.post('/', createReceiver);
 
 // GET /api/v1/excercises/<id>
 receiversRouter.get('/:id', getReceiver); // this is a get to a single excercise by a user provided id...id's populate in req.params(we write this in our controller)
-
-// PUT /api/v1/excercises/<id>
-receiversRouter.put('/:id', replaceReceiver);
 
 // DELETE /api/v1/excercises/<id>
 receiversRouter.delete('/:id', deleteReceiver);
