@@ -1,12 +1,13 @@
 import ReceiversCoordinator from "../coordinators/recievers.coordinator.js";
 
 export const getReceivers = async (req, res, next) => {
-  const result = ReceiversCoordinator.getReceivers();
+  const result = await ReceiversCoordinator.getReceivers(); // we're awaiting this now becuase it's talking to a DB
 
   res.status(200).json(result);
 };
 
 export const createReceiver = async (req, res, next) => {
+  // errors "bubble up " to the coordinator from the model so we can do error handling in the controller level
   try{
     const result = ReceiversCoordinator.createReceiver(req.body);
     res.status(200).json(result);
