@@ -1,15 +1,19 @@
 import ReceiversCoordinator from "../coordinators/recievers.coordinator.js";
 
 export const getReceivers = async (req, res, next) => {
-  const result = await ReceiversCoordinator.getReceivers(); // we're awaiting this now becuase it's talking to a DB
+  try {
+    const result = await ReceiversCoordinator.getReceivers(); // we're awaiting this now becuase it's talking to a DB
 
-  res.status(200).json(result);
+    res.status(200).json(result);
+  } catch (ex) {
+    next(ex);
+  }
 };
 
 export const createReceiver = async (req, res, next) => {
   // errors "bubble up " to the coordinator from the model so we can do error handling in the controller level
-  try{
-    const result = ReceiversCoordinator.createReceiver(req.body);
+  try {
+    const result = await ReceiversCoordinator.createReceiver(req.body);
     res.status(200).json(result);
   } catch (ex) { // ex is a param that we could name anything...it's an exception (error) we're catching so ex for short
     next(ex); // this is what invokes our error handler middleware
@@ -20,19 +24,25 @@ export const getReceiver = async (req, res, next) => {
   console.log('Controller: getReceiver');
   console.log('Request Params ID:', req.params.id);
 
-  const result = ReceiversCoordinator.getReceiver(req.params.id); // req.params.id here is the reciever by id...req.params is on the request object and hold params 
-
-  if (result) { // this checks if result (req.param.id) exists and if so, I get a 200 with result...if not then 404 
-    res.status(200).json(result);
-  } else {
-    res.status(404).json();
+  try {
+    const result = await ReceiversCoordinator.getReceiver(req.params.id); // req.params.id here is the reciever by id...req.params is on the request object and hold params and now this has to be awaited becuase it's an async operation becuase I'm accessing a DB
+    if (result) { // this checks if result (req.param.id) exists and if so, I get a 200 with result...if not then 404 
+      res.status(200).json(result);
+    } else {
+      res.status(404).json();
+    }
+  } catch (ex) {
+    next(ex);
   }
 };
 
 export const deleteReceiver = async (req, res, next) => {
-  const result = ReceiversCoordinator.deleteReceiver(req.params.id);
-
-  res.status(200).json(result);
+  try {
+    await ReceiversCoordinator.deleteReceiver(req.params.id);
+    res.status(204).json();
+  } catch (ex) {
+    next(ex); // you pretty much want to do a try/catch with next(ex) in all your controller functions ***
+  }
 };
 
 export const updateReceiver = async (req, res, next) => {
