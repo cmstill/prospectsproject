@@ -4,6 +4,7 @@ import receiversRouter from './routes/receivers.routes.js';
 import backsRouter from './routes/backs.routes.js';
 import errorMiddleware from './middleware/errorHandler.js';
 import { db } from './lib/database.js'; // its fine to rename Database class from lib/database.js here because we can rename w/ imports
+import tightendsRouter from './routes/tightends.routes.js';
 
 const { json } = bodyParser;
 
@@ -13,6 +14,7 @@ app.use(json()); // this is express.use() to set up a new middleware.  In this c
 
 app.use('/api/v1/receivers', receiversRouter);
 app.use('/api/v1/backs', backsRouter);
+app.use('/api/v1/tightends', tightendsRouter);
 
 // use app.use to set up new router to '/api/v1/runningbacks
 
