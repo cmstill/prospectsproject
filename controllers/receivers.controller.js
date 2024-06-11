@@ -1,4 +1,4 @@
-import ReceiversCoordinator from "../coordinators/recievers.coordinator.js";
+import ReceiversCoordinator from "../coordinators/receivers.coordinator.js";
 
 export const getReceivers = async (req, res, next) => {
   try {
@@ -23,12 +23,16 @@ export const createReceiver = async (req, res, next) => {
 export const getReceiver = async (req, res, next) => {
   console.log('Controller: getReceiver');
   console.log('Request Params ID:', req.params.id);
+  try {
     const result = await ReceiversCoordinator.getReceiver(req.params.id); // req.params.id here is the reciever by id...req.params is on the request object and hold params and now this has to be awaited becuase it's an async operation becuase I'm accessing a DB
     if (result) { // this checks if result (req.param.id) exists and if so, I get a 200 with result...if not then 404 
       res.status(200).json(result);
     } else {
       res.status(404).json();
     }
+  } catch (ex) {
+    next(ex);
+  }
 };
 
 export const deleteReceiver = async (req, res, next) => {

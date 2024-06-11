@@ -2,21 +2,9 @@
 import { db } from '../lib/database.js'; // again mongo here is just a renaming of Database class from the file I'm importing
 import Constants from '../lib/constants.js';
 
-const receivers = [
-  {
-    id: '1',
-    name: 'cameron',
-    ytpa: 2.01,
-    yrr: 2.2,
-    boy: 1,
-    capital: 27,
-  },
-];
-
 export default class ReceiversModel {
   static getReceivers = async () =>
   // return widgets...this needs to be an async function because we're interacting with a database
-
     db.getDb().collection(Constants.WRS_COLLECTION).find({}, { projection: Constants.DEFAULT_PROJECTION }).toArray(); // this is using our Database class we set up lib/database and calling getDb method on that then calling .collection method to speciffy what collection we're working with then .find mongo CRUD method fin because we're getting the documents in our collection
 
   static createReceiver = async (newReceiver) => { // this is accepting a newReceiver (request object from user) then adding it to the wrs collection in my db
@@ -28,9 +16,9 @@ export default class ReceiversModel {
   };
 
   static getReceiver = (id) => {
-		console.log('Model: getReceiver with ID:', id);
-		return db.getDb().collection(Constants.WRS_COLLECTION).findOne({ id }, { projection: Constants.DEFAULT_PROJECTION });
-	};
+    console.log('Model: getReceiver with ID:', id);
+    return db.getDb().collection(Constants.WRS_COLLECTION).findOne({ id }, { projection: Constants.DEFAULT_PROJECTION });
+  };
 
   static deleteReceiver = (id) => db.getDb().collection(Constants.WRS_COLLECTION).deleteOne({ id });
 
@@ -46,10 +34,11 @@ export default class ReceiversModel {
       update.$set[key] = receiver[key];
     });
 
-    const result = await db.getDb().collection(Constants.WRS_COLLECTION).updateOne({ id }, update);
+    const result = await db.getDb().collection(Constants.WRS_COLLECTION).findOneAndUpdate({ id }, update, { returnDocument: 'after' });
 
-    if (result.matchedCount === 1) {
-      return receiver;
+    if (result) {
+      delete result._id;
+      return result;
     }
 
     return false;
