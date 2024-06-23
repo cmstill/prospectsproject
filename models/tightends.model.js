@@ -8,7 +8,7 @@ export default class TightEndsModel {
   static createTightEnd = async (newTightEnd) => { 
     console.log('t//Model: CreateTightEnd');
 
-    await db.getDb().collection(Constants.TES_COLLECTION).insertOne({ newTightEnd });
+    await db.getDb().collection(Constants.TES_COLLECTION).insertOne(newTightEnd);
     delete newTightEnd._id;
   };
 

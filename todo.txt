@@ -1,0 +1,32 @@
+TODO for api...
+
+1. fix the problems with delete and get by id not working
+2. add validation -- JSON Schema
+	a. for RBs
+	b. for WRs
+	c. for TEs
+3. add JSDoc for all my functions
+4. possibly convert to TypeScript?
+
+
+
+
+TODO for database...
+
+1. add in indexes?  On what though and for what reason?
+
+
+
+
+TODO for UI/Front end
+
+1. everything
+ a. first -- just set up an HTML page that will display the results of one button press that calls my api for RBs
+
+In order to do anything, I'm going to have to watch all the angular videos over the next couple of days.  So just get that done...easy enough
+
+
+
+TODO etc. 
+
+1. review concepts in Anki...I've let this sit for a long time so it'll take a couple hours or more.  Tommorrow morning maybe. 

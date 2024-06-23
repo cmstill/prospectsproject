@@ -8,7 +8,7 @@ export default class BacksModel {
   static createBack = async (newBack) => { 
     console.log('t//Model: CreateBack');
 
-    await db.getDb().collection(Constants.RBS_COLLECTION).insertOne({ newBack });
+    await db.getDb().collection(Constants.RBS_COLLECTION).insertOne(newBack);
     delete newBack._id;
   };
 
@@ -41,3 +41,5 @@ export default class BacksModel {
     return false;
   };
 }
+
+//testing

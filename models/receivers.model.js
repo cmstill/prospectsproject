@@ -10,7 +10,7 @@ export default class ReceiversModel {
   static createReceiver = async (newReceiver) => { // this is accepting a newReceiver (request object from user) then adding it to the wrs collection in my db
     console.log('t//Model: CreateReceiver');
 
-    await db.getDb().collection(Constants.WRS_COLLECTION).insertOne({ newReceiver });
+    await db.getDb().collection(Constants.WRS_COLLECTION).insertOne(newReceiver);
     delete newReceiver._id; // using delte keyword to delete _id property on newReciever object because insertOne doesnt take a projection so we can't do it there
     return newReceiver; // these two lines are so I get returned to me what I actually want which is the new receiver I created in this case
   };
