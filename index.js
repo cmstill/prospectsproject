@@ -12,6 +12,8 @@ const app = express();
 const port = 3000;
 app.use(json()); // this is express.use() to set up a new middleware.  In this case, that middleware is bodyparser that allows us to parse and use incoming request bodies
 
+app.use(express.static('./static'));
+
 app.use('/api/v1/receivers', receiversRouter);
 app.use('/api/v1/backs', backsRouter);
 app.use('/api/v1/tightends', tightendsRouter);
