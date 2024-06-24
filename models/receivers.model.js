@@ -3,9 +3,9 @@ import { db } from '../lib/database.js'; // again mongo here is just a renaming 
 import Constants from '../lib/constants.js';
 
 export default class ReceiversModel {
-  static getReceivers = async () =>
+  static getReceivers = async (sortDirection) =>
   // return widgets...this needs to be an async function because we're interacting with a database
-    db.getDb().collection(Constants.WRS_COLLECTION).find({}, { projection: Constants.DEFAULT_PROJECTION }).toArray(); // this is using our Database class we set up lib/database and calling getDb method on that then calling .collection method to speciffy what collection we're working with then .find mongo CRUD method fin because we're getting the documents in our collection
+    db.getDb().collection(Constants.WRS_COLLECTION).find({}, { sort: { ytpa: sortDirection }, projection: Constants.DEFAULT_PROJECTION }).toArray(); // this is using our Database class we set up lib/database and calling getDb method on that then calling .collection method to speciffy what collection we're working with then .find mongo CRUD method fin because we're getting the documents in our collection
 
   static createReceiver = async (newReceiver) => { // this is accepting a newReceiver (request object from user) then adding it to the wrs collection in my db
     console.log('t//Model: CreateReceiver');
@@ -20,7 +20,7 @@ export default class ReceiversModel {
     return db.getDb().collection(Constants.WRS_COLLECTION).findOne({ id }, { projection: Constants.DEFAULT_PROJECTION });
   };
 
-  static deleteReceiver = (id) => db.getDb().collection(Constants.WRS_COLLECTION).deleteOne({ id });
+  static deleteReceiver = (id) => db.getDb().collection(Constants.WRS_COLLECTION).deleteOne({ id })
 
   static updateReceiver = async (id, receiver) => {
     const update = {

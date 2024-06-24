@@ -1,8 +1,10 @@
 import ReceiversCoordinator from "../coordinators/receivers.coordinator.js";
 
 export const getReceivers = async (req, res, next) => {
+  const sortDirection = req.query?.sortDirection?.toLowerCase() === 'asc' ? 1 : -1;
+
   try {
-    const result = await ReceiversCoordinator.getReceivers(); // we're awaiting this now becuase it's talking to a DB
+    const result = await ReceiversCoordinator.getReceivers(sortDirection); // we're awaiting this now becuase it's talking to a DB
 
     res.status(200).json(result);
   } catch (ex) {
